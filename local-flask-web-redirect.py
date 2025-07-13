@@ -7,14 +7,25 @@ def load_shortcuts():
     with open('shortcuts.json') as f:
         return json.load(f)
 
+def load_work_shortcuts():
+    with open('work_shortcuts.json') as f:
+        return json.load(f)
+
+def load_personal_shortcuts():
+    with open('personal_shortcuts.json') as f:
+        return json.load(f)
 
 @app.route("/<path>")
 def go(path):
     shortcuts = load_shortcuts()
-    url = shortcuts.get(path)
+    work_shortcuts = load_work_shortcuts()
+    personal_shortcuts = load_personal_shortcuts()
+
+    url = shortcuts.get(path) or work_shortcuts.get(path) or personal_shortcuts.get(path)
     if url:
         return redirect(url)
     return custom_404(None)
+
 
 @app.route("/")
 def index():
