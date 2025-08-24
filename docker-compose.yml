@@ -1,0 +1,8 @@
+version: '3.8'
+
+services:
+  flaskapp:
+    build: .
+    ports:
+      - "80:8080"         # Maps port 80 on your machine to 8080 in the container
+    restart: always       # Automatically restarts on crash or reboot
